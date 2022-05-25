@@ -1,0 +1,50 @@
+import React,{useState, useContext} from "react";
+import VaccineContext from "../context/VaccineContext"
+//useReducer
+const intialvalue = {name:'',date:'',vaccine:''}
+// const intialvalueState = {newVaccine:[]}
+
+// const reducer = (state, action) =>{
+//   switch (action.type) {
+//     case "ADD_VACCINE":
+//       const updateMember = [...state.newVaccine, action.payload];
+//       return{...state, newVaccine:updateMember}
+//     // break;
+//     default:
+//       return state;
+//   }
+//   } 
+export const VaccineFrom = () => {
+    const {dispatch} = useContext(VaccineContext)
+    
+    const [vaccineForm, setVaccineForm] = useState(intialvalue)
+
+    const handleFormChange = (e) =>{
+      setVaccineForm({...vaccineForm,[e.target.name]:e.target.value})
+    }
+  
+    // const [state, dispatch] = useReducer(reducer, intialvalueState)
+  
+    const handleFormSubmit = (e) =>{
+      e.preventDefault()
+    //   dispatch({type:"ADD_VACCINE", payload:vaccineForm})
+      setVaccineForm(intialvalue)
+    }
+  return (
+    <div>
+      <form onSubmit={(e) =>{handleFormSubmit(e)}}>
+        <input onChange={(e)=>{handleFormChange(e)}} type="text" name="name" placeholder="Name of candidate" /> <br /><br />
+        <input onChange={(e)=>{handleFormChange(e)}} type="date" name="date" placeholder="Vaccine Date" /> <br /><br />
+        <input onChange={(e)=>{handleFormChange(e)}} type="text" name="vaccine" placeholder="Vaccine" />
+        <button>Submit</button>
+      </form>
+      {/* {state.newVaccine.map((data, index)=>(
+         <div key={index}>
+            <h1>Name: {data.name}</h1>
+            <h1>Date: {data.date}</h1>
+            <h1>Vaccine: {data.vaccine}</h1>
+        </div>
+      ))} */}
+    </div>
+  )
+}
